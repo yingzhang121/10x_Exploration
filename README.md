@@ -19,11 +19,9 @@ I started with two outputs from cellranger: the raw bam file "possorted_genome_b
 Initially, I planned to split the bam file into thousands of small bam files given each cell barcode (CB). 
 However, I found it is almost impractical to do so.
 
-> There are some discussion on splitting 10x data per cell, such as
-> https://www.biostars.org/p/46327/
-> https://github.com/pezmaster31/bamtools/issues/135
-> Basically speaking the issue is there are thousands of cells in one bam file, so neither the program
-> such as bamtools can keep all output files open, nor an IO routine can do it efficiently.
+> There are some discussion on splitting 10x data per cell, such as https://www.biostars.org/p/46327/ and
+> https://github.com/pezmaster31/bamtools/issues/135 . Basically speaking, the issue is there are thousands of cells in one bam 
+> file, so neither the program such as bamtools can keep all output files open, nor an IO routine can do it efficiently.
 > (To be frank, I tried the methods mentioned in a few posts, none worked).
 
 Then I got suggestion to set up a RAM DISC, which I didn't pursue further because I got a third recommedation,
@@ -39,9 +37,8 @@ my job done within one or two hours. (it seems no need for parallelization for n
 
 So I came up with the "raw_read_count_per_gene.sh" routine to generate the raw count table.
 
-Follow-up analysis:
-------
-I ran some correlation analysis between my raw read count table and the cellranger UMI count table.
-They correlate very well, with pearson correlation coefficient ranging from 0.8 - 0.9 per cell with or without all those "0" counts.
-Of course, the p value is very significant. However, for genes with low counts, I did observe greater variability between 
+> Follow-up analysis:
+> I ran some correlation analysis between my raw read count table and the cellranger UMI count table.
+> They correlate very well, with pearson correlation coefficient ranging from 0.8 - 0.9 per cell with or without all those "0" counts.
+> Of course, the p value is very significant. However, for genes with low counts, I did observe greater variability between 
 raw read counts and UMI counts.  It will be very interesting to dig it out more here.
